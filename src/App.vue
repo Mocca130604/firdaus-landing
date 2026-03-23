@@ -14,6 +14,7 @@ import SkillsSection from './sections/SkillsSection.vue'
 
 const isReady = ref(false)
 const mouse = ref({ x: 0, y: 0 })
+const intro = 'Frontend Developer with 3+ years of experience specializing in Vue.js and Nuxt.js, building scalable web applications and modular frontend architectures. Experienced in developing responsive interfaces, microfrontend systems, and performance-focused applications using modern JavaScript, Tailwind CSS, and Laravel APIs.'
 
 const aboutStats = [
   { label: 'Experience', value: '3+ Years' },
@@ -227,19 +228,226 @@ const skillGroups = [
 ]
 
 const experiences = [
-  { company: 'Datasea', period: '2023 - Present', role: 'Frontend Developer', detail: 'Building scalable internal products with modular Vue architecture and polished UI systems.' },
-  { company: 'Globy.id', period: '2022 - 2023', role: 'Frontend Developer', detail: 'Delivered responsive interfaces and product improvements with a strong focus on usability and maintainability.' },
-  { company: 'SIDIGS', period: '2022 - 2023', role: 'Frontend Developer', detail: 'Contributed to web application features, performance tuning, and reusable frontend patterns.' },
-  { company: 'Syabab Studio', period: 'Freelance', role: 'Frontend Developer', detail: 'Partnered on client-facing websites and dashboards with custom interactions and responsive layouts.' },
-  { company: 'Freelance Developer', period: 'Independent', role: 'Web Developer', detail: 'Handled end-to-end development for business websites and application interfaces.' },
-  { company: 'Flutter Developer', period: 'Earlier Role', role: 'Mobile Developer', detail: 'Built cross-platform mobile experiences and carried that product mindset into frontend web work.' },
+  {
+    company: 'Datasea',
+    period: 'Jul 2023 - Present',
+    role: 'Frontend Developer',
+    detail: 'Leading and scaling enterprise frontend delivery across procurement, recruitment, transport, and mining-related products.',
+    description: 'Owns frontend architecture and implementation for multiple enterprise web products, with a strong focus on modular Vue applications, micro frontend delivery, maintainable standards, and efficient Laravel-backed fullstack collaboration.',
+    projects: [
+      'E-Procurement Product',
+      'E-Recruitment Platform',
+      'Transport Management System (TMS)',
+      'Mining Management Project',
+      'E-Procurement Blueprint',
+    ],
+    responsibilities: [
+      'Served as Frontend Lead for the E-Procurement product and aligned frontend delivery with business goals.',
+      'Architected and implemented a micro frontend framework in Vue.js for the E-Recruitment platform.',
+      'Built enterprise-grade solutions with Laravel for TMS and E-Procurement blueprint workflows.',
+      'Developed high-performance interfaces for mining and procurement modules with responsive data-heavy UI.',
+      'Standardized frontend best practices, project structure, and maintainability across multiple products.',
+    ],
+    techStack: ['Vue.js', 'Nuxt.js', 'JavaScript', 'Tailwind CSS', 'SCSS', 'Laravel', 'REST API', 'MySQL', 'Vite', 'Git'],
+    achievements: [
+      'Established reusable frontend patterns that improved modularity across products.',
+      'Enabled independent team delivery through micro frontend architecture.',
+      'Improved application maintainability and load performance through standardized frontend practices.',
+    ],
+    workflow: ['Git', 'Jira', 'Agile/Scrum', 'Docker', 'Figma'],
+  },
+  {
+    company: 'Pekerja Lepas',
+    period: 'Jul 2022 - May 2023',
+    role: 'Frontend Web Developer',
+    detail: 'Delivered an end-to-end online course platform with smooth browsing, checkout, enrollment, and learning flows.',
+    description: 'Handled freelance frontend delivery for an online learning product, building responsive and performant course experiences while coordinating critical commerce and enrollment workflows with backend services.',
+    projects: [
+      'Online Course Platform',
+      'Course Catalog and Lesson Modules',
+      'Checkout and Enrollment Workflow',
+    ],
+    responsibilities: [
+      'Developed a complete online course experience for browsing, purchasing, and accessing digital content.',
+      'Built high-performance Vue.js interfaces with fast page load and smooth lesson navigation.',
+      'Integrated complex checkout flows with backend systems for secure payment handling.',
+      'Implemented responsive design across desktop, tablet, and mobile devices.',
+      'Managed dynamic application state for carts, enrollments, and progress tracking.',
+    ],
+    techStack: ['Vue.js', 'JavaScript', 'CSS', 'REST API', 'Git'],
+    achievements: [
+      'Delivered a seamless course purchase-to-learning journey for end users.',
+      'Improved usability and consistency across multi-device learning flows.',
+    ],
+    workflow: ['Git', 'Agile/Scrum', 'Figma'],
+  },
+  {
+    company: 'SIDIGS',
+    period: 'Jun 2022 - May 2023',
+    role: 'Frontend Developer',
+    detail: 'Revamped student-facing web experiences and maintained core teacher platforms for daily academic operations.',
+    description: 'Contributed to the modernization of SIDIGS web products by improving UI/UX, maintaining platform stability, and building reusable Nuxt-based components for a more scalable internal web ecosystem.',
+    projects: [
+      'Student Web Platform',
+      'Teacher Web Platform',
+      'Reusable Web Component Initiative',
+    ],
+    responsibilities: [
+      'Executed a comprehensive revamp of the Student Web Platform to improve UI/UX and navigation efficiency.',
+      'Maintained and optimized the Teacher Web Platform to support reliable daily academic operations.',
+      'Developed reusable components using Nuxt.js and CSS for better scalability and maintainability.',
+      'Ensured cross-browser compatibility and mobile responsiveness across web portals.',
+    ],
+    techStack: ['Vue.js', 'Nuxt.js', 'JavaScript', 'SCSS', 'REST API', 'Git'],
+    achievements: [
+      'Improved usability for thousands of users through a more modern and navigable student platform.',
+      'Raised maintainability across the internal web ecosystem with reusable frontend building blocks.',
+    ],
+    workflow: ['Git', 'Agile/Scrum', 'Figma'],
+  },
+  {
+    company: 'SyababStudio',
+    period: 'Dec 2022 - Mar 2023',
+    role: 'Frontend Developer',
+    detail: 'Built an e-learning platform centered on course discovery, checkout, enrollment, and content consumption.',
+    description: 'Worked closely with stakeholders to deliver an engaging e-learning platform, focusing on dynamic browsing experiences, purchase flows, responsive behavior, and UI/UX polish across devices.',
+    projects: [
+      'E-Learning Platform',
+      'Course Catalog and Filtering System',
+      'Checkout and Enrollment Workflow',
+    ],
+    responsibilities: [
+      'Developed a comprehensive e-learning platform for purchasing and consuming online courses.',
+      'Built dynamic course catalog and filtering experiences using Vue.js.',
+      'Integrated secure checkout and enrollment workflows for active learning journeys.',
+      'Optimized responsiveness and performance across desktop and mobile devices.',
+      'Collaborated with stakeholders to implement intuitive UI/UX improvements.',
+    ],
+    techStack: ['Vue.js', 'JavaScript', 'HTML', 'CSS', 'Git'],
+    achievements: [
+      'Increased user engagement through intuitive e-learning interaction patterns.',
+      'Delivered a consistent learning experience across devices and screen sizes.',
+    ],
+    workflow: ['Git', 'Agile/Scrum', 'Figma'],
+  },
+  {
+    company: 'Globy.id',
+    period: 'Nov 2022 - Jan 2023',
+    role: 'Frontend Web Developer',
+    detail: 'Built a ticketing platform with transactional workflows, organizer dashboards, and strong monolithic Laravel maintainability.',
+    description: 'Contributed to an event ticketing platform by building frontend-web functionality inside a monolithic Laravel architecture, with attention to payment flow reliability, dashboard usability, and backend-to-frontend consistency.',
+    projects: [
+      'Event Ticketing Platform',
+      'Organizer Management Dashboard',
+      'Payment and E-Ticket Workflow',
+    ],
+    responsibilities: [
+      'Developed the event ticketing platform within a monolithic Laravel architecture.',
+      'Engineered transactional flows including secure payments and automatic e-ticket generation.',
+      'Built dashboards for organizers to track ticket sales and attendee data in real time.',
+      'Optimized database and query performance for traffic spikes during ticket releases.',
+      'Managed application flow from server-side logic to frontend rendering consistency.',
+    ],
+    techStack: ['Laravel', 'JavaScript', 'Blade', 'MySQL', 'Git'],
+    achievements: [
+      'Improved platform reliability for payment and ticket issuance workflows.',
+      'Supported high-traffic event release periods with better query efficiency.',
+    ],
+    workflow: ['Git', 'Agile/Scrum'],
+  },
+  {
+    company: 'Pekerja Lepas',
+    period: 'Jun 2022 - Nov 2022',
+    role: 'Full-stack Developer',
+    detail: 'Handled freelance full-stack delivery during an early project phase before focusing more deeply on frontend specialization.',
+    description: 'Worked as a freelance full-stack developer on client project delivery, covering both interface implementation and backend-connected application needs during a compact engagement period.',
+    projects: [
+      'Custom Web Application Delivery',
+      'Frontend and Backend Integration',
+      'Client Feature Implementation',
+    ],
+    responsibilities: [
+      'Implemented web features across frontend and backend-connected flows.',
+      'Handled application changes based on client and product requirements.',
+      'Supported delivery of responsive interfaces and functional business logic.',
+    ],
+    techStack: ['JavaScript', 'PHP', 'MySQL', 'HTML', 'CSS', 'Git'],
+    achievements: [
+      'Delivered full-stack support across a short freelance engagement.',
+      'Built a practical foundation for later frontend-focused product work.',
+    ],
+    workflow: ['Git', 'Agile/Scrum'],
+  },
+  {
+    company: 'SIDIGS',
+    period: 'Jul 2021 - Jul 2022',
+    role: 'Mobile Developer',
+    detail: 'Built the SIDIGS Student mobile app from the ground up with education-focused flows and strong usability fundamentals.',
+    description: 'Developed the student mobile application using Flutter, implementing key academic features and iterating with the product team to improve usability and overall mobile experience.',
+    projects: [
+      'SIDIGS Student Mobile Application',
+      'Student Profile Module',
+      'Course Schedule and Academic Tracking',
+    ],
+    responsibilities: [
+      'Developed the SIDIGS Student mobile application from the ground up.',
+      'Implemented student profile, course schedule, and academic tracking features using Flutter.',
+      'Delivered responsive and user-friendly mobile flows for educational management.',
+      'Collaborated with the product team to iterate on user feedback and improve usability.',
+    ],
+    techStack: ['Flutter', 'Dart', 'REST API', 'Git'],
+    achievements: [
+      'Established the first version of the student mobile experience for SIDIGS.',
+      'Built a strong product and usability foundation that carried into later frontend work.',
+    ],
+    workflow: ['Git', 'Agile/Scrum', 'Figma'],
+  },
 ]
 
+
 const projects = [
-  { title: 'Transportation Management System', description: 'Operations dashboard for tracking logistics, scheduling, and fleet coordination with a clean data-rich UI.', stack: ['Vue 3', 'Tailwind CSS', 'GSAP'], live: '#projects', github: '#' },
-  { title: 'E-Procurement Platform', description: 'Procurement workflow platform designed for vendor management, approvals, and transparent purchasing pipelines.', stack: ['Vue', 'Laravel', 'MySQL'], live: '#projects', github: '#' },
-  { title: 'E-Learning Platform', description: 'Learning portal with responsive course flows, user-friendly navigation, and scalable frontend modules.', stack: ['Nuxt', 'Tailwind CSS', 'API Integration'], live: '#projects', github: '#' },
-  { title: 'E-Class Platform', description: 'Modern classroom experience for assignments, student tracking, and content delivery across devices.', stack: ['Vue', 'SCSS', 'JavaScript'], live: '#projects', github: '#' },
+  {
+    title: 'E-Procurement Product',
+    description: 'Enterprise procurement platform focused on frontend leadership, modular workflows, and smoother alignment between technical delivery and business goals.',
+    stack: ['Vue.js', 'Laravel', 'MySQL'],
+    live: '#projects',
+    github: '#',
+  },
+  {
+    title: 'E-Recruitment Platform',
+    description: 'Recruitment platform built with a micro frontend approach to support modular development, cleaner ownership, and independent team delivery.',
+    stack: ['Vue.js', 'Nuxt.js', 'Micro Frontend'],
+    live: '#projects',
+    github: '#',
+  },
+  {
+    title: 'Transport Management System (TMS)',
+    description: 'Operational transport management system with Laravel-backed workflows, structured data handling, and responsive dashboards for business operations.',
+    stack: ['Vue.js', 'Laravel', 'REST API'],
+    live: '#projects',
+    github: '#',
+  },
+  {
+    title: 'Online Course Platform',
+    description: 'End-to-end learning commerce platform covering course discovery, checkout, enrollment, and content access with a responsive user journey.',
+    stack: ['Vue.js', 'JavaScript', 'REST API'],
+    live: '#projects',
+    github: '#',
+  },
+  {
+    title: 'Event Ticketing Platform',
+    description: 'Ticketing product with secure payment flow, e-ticket generation, and organizer dashboards built within a maintainable Laravel monolith.',
+    stack: ['Laravel', 'Blade', 'MySQL'],
+    live: '#projects',
+    github: '#',
+  },
+  {
+    title: 'SIDIGS Student Mobile Application',
+    description: 'Education mobile app developed from the ground up for student profiles, schedules, and academic tracking with strong usability focus.',
+    stack: ['Flutter', 'Dart', 'REST API'],
+    live: '#projects',
+    github: '#',
+  },
 ]
 
 const navItems = [
@@ -315,9 +523,7 @@ onUnmounted(() => {
       </header>
 
       <main class="mx-auto flex flex-col gap-10 px-4 pb-16 pt-8 sm:px-6 lg:px-10">
-        <HeroSection id="hero" class="journey-section" name="Firdaus Mochamad" role="Frontend Developer"
-          intro="Frontend Developer with 3+ years of experience building scalable and user-friendly web applications, specializing in the Vue.js ecosystem and performance-focused interfaces."
-          :social-links="socialLinks" />
+        <HeroSection id="hero" class="journey-section" name="Firdaus Mochamad" role="Frontend Developer" :intro="intro" />
 
         <AboutSection id="about" class="journey-section" :stats="aboutStats" />
 
@@ -327,9 +533,9 @@ onUnmounted(() => {
 
         <ProjectsSection id="projects" class="journey-section" :projects="projects" />
 
-        <ContactSection id="contact" class="journey-section" name="Firdaus Mochamad" email="firdausmochamad13@gmail.com"
-          phone="+62 895395200351" location="Malang, Indonesia" />
+        <ContactSection id="contact" class="journey-section" name="Firdaus Mochamad" :social-links="socialLinks" />
       </main>
     </div>
   </div>
 </template>
+
