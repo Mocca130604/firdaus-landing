@@ -10,11 +10,10 @@ defineProps({
 </script>
 
 <template>
-  <section class="section-frame px-6 py-12 sm:px-8 lg:px-12">
-    <div class="mb-8 max-w-3xl">
-      <p class="font-display text-sm uppercase tracking-[0.45em] text-glow-cyan/80">Planet Three</p>
-      <h2 class="mt-4 font-display text-4xl font-bold text-white sm:text-5xl">Space Station Timeline</h2>
-      <p class="mt-4 text-base leading-8 text-white/70">
+  <section class="py-12 px-gutter max-w-container-max mx-auto" id="experience">
+    <div class="mb-10 max-w-3xl">
+      <h2 class="font-display text-headline-lg mb-stack-md border-l-4 border-primary pl-6">CHRONICLES</h2>
+      <p class="font-body-lg text-on-surface-variant leading-relaxed">
         A professional product timeline that highlights the systems I helped build, the engineering responsibilities I owned, and the technical decisions behind each role.
       </p>
     </div>

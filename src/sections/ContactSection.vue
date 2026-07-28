@@ -80,58 +80,47 @@ const submitMessage = async () => {
 </script>
 
 <template>
-  <section class="section-frame px-6 py-12 sm:px-8 lg:px-12">
-    <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-      <div>
-        <p class="font-display text-sm uppercase tracking-[0.45em] text-glow-cyan/80">Planet Five</p>
-        <h2 class="mt-4 font-display text-4xl font-bold text-white sm:text-5xl">Space Terminal</h2>
-        <p class="mt-4 text-base leading-8 text-white/70">
-          If you're looking for a frontend engineer who cares about architecture, polish, and performance, let's
-          connect.
+  <section class="py-12 px-gutter relative overflow-hidden" id="contact">
+    <div class="max-w-container-max mx-auto relative z-10">
+      <div class="glass-panel p-10 md:p-16 rounded-[3rem] text-center max-w-4xl mx-auto border border-primary/20 shadow-panel">
+        <h2 class="font-display text-display mb-stack-md text-glow">CONNECT</h2>
+        <p class="font-body-lg text-on-surface-variant mb-8 max-w-xl mx-auto">
+          Ready to initiate a new project or collaborate on something cosmic? Drop a signal below.
         </p>
 
-        <div class="mt-8 space-y-4">
+        <!-- Social Badges Grid -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 max-w-2xl mx-auto">
           <a v-for="item in socialLinks" :key="item.label" :href="item.href"
-            class="glass-panel flex items-center gap-4 rounded-2xl p-4 transition hover:-translate-y-1">
-            <component :is="item.icon" class="h-5 w-5 text-glow-cyan" />
-            <div>
-              <p class="text-xs uppercase tracking-[0.3em] text-white/45">{{ item.label }}</p>
-              <p class="text-sm text-white/80">{{ item.value }}</p>
-            </div>
+            class="glass-panel flex items-center gap-3 rounded-full px-5 py-2.5 text-sm text-white/80 border border-primary/10 transition hover:-translate-y-1 hover:border-secondary-fixed-dim/40 hover:text-white">
+            <component :is="item.icon" class="h-4 w-4 text-secondary-fixed-dim" />
+            <span class="font-label-caps text-xs uppercase tracking-wider">{{ item.label }}</span>
           </a>
         </div>
-      </div>
 
-      <form class="glass-panel rounded-[2rem] border border-glow-cyan/15 p-6 animate-pulse-glow"
-        @submit.prevent="submitMessage">
-        <div class="grid gap-5">
-          <label class="block">
-            <span class="mb-2 block text-sm text-white/70">Name</span>
-            <input v-model="contactForm.name" type="text" :placeholder="props.name"
-              class="w-full rounded-2xl border border-white/10 bg-space-950/70 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-glow-cyan/45" />
-          </label>
-          <label class="block">
-            <span class="mb-2 block text-sm text-white/70">Email</span>
-            <input v-model="contactForm.email" type="email" placeholder="your@email.com"
-              class="w-full rounded-2xl border border-white/10 bg-space-950/70 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-glow-cyan/45" />
-          </label>
-          <label class="block">
-            <span class="mb-2 block text-sm text-white/70">Message</span>
-            <textarea v-model="contactForm.message" rows="6" placeholder="Tell me about your mission..."
-              class="w-full rounded-2xl border border-white/10 bg-space-950/70 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-glow-cyan/45" />
-          </label>
-          <p v-if="!isConfigured" class="text-sm text-amber-200/90">
+        <!-- Contact Form -->
+        <form class="space-y-6 text-left max-w-lg mx-auto" @submit.prevent="submitMessage">
+          <div class="relative">
+            <input v-model="contactForm.name" type="text" :placeholder="`Your Name (e.g. ${props.name})`"
+              class="w-full bg-white/5 border border-primary/20 rounded-xl px-6 py-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50 text-white" />
+          </div>
+          <div class="relative">
+            <input v-model="contactForm.email" type="email" placeholder="Signal Origin (Email)"
+              class="w-full bg-white/5 border border-primary/20 rounded-xl px-6 py-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50 text-white" />
+          </div>
+          <div class="relative">
+            <textarea v-model="contactForm.message" rows="4" placeholder="Transmission Details (Tell me about your mission...)"
+              class="w-full bg-white/5 border border-primary/20 rounded-xl px-6 py-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50 text-white"></textarea>
+          </div>
+          <p v-if="!isConfigured" class="text-sm text-amber-200/90 text-center font-code-sm">
             Add your EmailJS configuration to the local <code>.env</code> file before testing this form.
           </p>
-          <p v-if="formError" class="text-sm text-rose-300">{{ formError }}</p>
-          <p v-else-if="submitState === 'success'" class="text-sm text-emerald-300">Your message has been sent
-            successfully.</p>
-          <button type="submit" :disabled="submitState === 'loading'"
-            class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-glow-primary to-glow-cyan px-6 py-3 text-sm font-semibold text-space-950 transition hover:shadow-[0_0_24px_rgba(0,229,255,0.35)] disabled:cursor-not-allowed disabled:opacity-70">
-            {{ submitState === 'loading' ? 'Sending...' : 'Send Message' }}
+          <p v-if="formError" class="text-sm text-rose-400 text-center">{{ formError }}</p>
+          <p v-else-if="submitState === 'success'" class="text-sm text-emerald-400 text-center">Your transmission has been received successfully.</p>
+          <button :disabled="submitState === 'loading'" class="w-full bg-gradient-to-r from-primary to-secondary-fixed-dim text-on-primary font-headline-md py-4 rounded-xl font-bold uppercase tracking-widest shadow-xl shadow-primary/30 active:scale-95 transition-transform" type="submit">
+            {{ submitState === 'loading' ? 'Sending Transmission...' : 'Send Transmission' }}
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </section>
 </template>

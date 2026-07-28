@@ -1,33 +1,109 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        space: {
-          950: '#0B0F1A',
-          900: '#121A2C',
-          800: '#17233C',
+        // Space / Glow Bridges
+        "space": {
+          950: '#0B0014',
+          900: '#1A0B2E',
+          800: '#28143F',
         },
-        glow: {
-          primary: '#7C9DFF',
-          secondary: '#9B8CFF',
-          cyan: '#00E5FF',
-          text: '#E6ECFF',
+        "glow": {
+          primary: '#BD00FF',
+          secondary: '#7df4ff',
+          cyan: '#00F0FF',
+          text: '#e1e3e4',
         },
+        // Astra Nova Theme Colors
+        "on-error": "#690005",
+        "tertiary-fixed": "#eddcff",
+        "secondary-container": "#00eefc",
+        "error-container": "#93000a",
+        "outline-variant": "#514255",
+        "secondary-fixed": "#7df4ff",
+        "on-secondary": "#00363a",
+        "on-secondary-container": "#00686f",
+        "surface-bright": "#373a3b",
+        "secondary": "#d3fbff",
+        "on-tertiary-container": "#fffeff",
+        "on-primary-fixed": "#320047",
+        "on-background": "#e1e3e4",
+        "primary-container": "#bd00ff",
+        "outline": "#9d8ba0",
+        "surface-variant": "#323536",
+        "on-error-container": "#ffdad6",
+        "inverse-surface": "#e1e3e4",
+        "on-tertiary": "#38294d",
+        "inverse-on-surface": "#2e3132",
+        "tertiary-fixed-dim": "#d3beeb",
+        "secondary-fixed-dim": "#00dbe9",
+        "primary-fixed-dim": "#ecb2ff",
+        "surface-container-high": "#282a2b",
+        "on-primary-container": "#ffffff",
+        "background": "#111415",
+        "on-secondary-fixed-variant": "#004f54",
+        "tertiary-container": "#806e97",
+        "on-primary-fixed-variant": "#74009f",
+        "error": "#ffb4ab",
+        "inverse-primary": "#9900cf",
+        "surface-container-highest": "#323536",
+        "primary-fixed": "#f8d8ff",
+        "surface-tint": "#ecb2ff",
+        "on-surface": "#e1e3e4",
+        "surface-dim": "#111415",
+        "surface-container-lowest": "#0c0f10",
+        "surface-container": "#1d2021",
+        "on-tertiary-fixed": "#231437",
+        "on-surface-variant": "#d4c0d7",
+        "on-tertiary-fixed-variant": "#4f4065",
+        "surface-container-low": "#191c1d",
+        "surface": "#111415",
+        "primary": "#ecb2ff",
+        "on-secondary-fixed": "#002022",
+        "tertiary": "#d3beeb",
+        "on-primary": "#520071"
+      },
+      borderRadius: {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "section-gap": "8rem",
+        "gutter": "2rem",
+        "stack-md": "1.5rem",
+        "margin-mobile": "1rem",
+        "stack-lg": "3rem",
+        "stack-sm": "0.5rem",
+        "container-max": "1280px"
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
-        alt: ['Satoshi', 'Inter', 'sans-serif'],
+        "label-caps": ["Geist", "monospace"],
+        "headline-md": ["Sora", "sans-serif"],
+        "headline-lg": ["Sora", "sans-serif"],
+        "code-sm": ["Geist", "monospace"],
+        "headline-lg-mobile": ["Sora", "sans-serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "display": ["Sora", "sans-serif"],
+        "body-lg": ["Inter", "sans-serif"]
+      },
+      fontSize: {
+        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700"}],
+        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+        "code-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "500"}],
+        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+        "display": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
       },
       boxShadow: {
-        planet: '0 0 30px rgba(124, 157, 255, 0.2), 0 0 80px rgba(0, 229, 255, 0.12)',
-        panel: '0 10px 40px rgba(5, 10, 30, 0.55)',
-      },
-      backgroundImage: {
-        'nebula-soft':
-          'radial-gradient(circle at top, rgba(124,157,255,0.2), transparent 40%), radial-gradient(circle at 80% 20%, rgba(155,140,255,0.15), transparent 35%), radial-gradient(circle at 50% 80%, rgba(0,229,255,0.12), transparent 30%)',
+        planet: '0 0 30px rgba(189, 0, 255, 0.2), 0 0 80px rgba(0, 219, 233, 0.12)',
+        panel: '0 10px 40px rgba(11, 0, 20, 0.55)',
       },
       keyframes: {
         drift: {
@@ -39,8 +115,8 @@ export default {
           to: { transform: 'rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg)' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 0 rgba(0, 229, 255, 0.2)' },
-          '50%': { boxShadow: '0 0 26px rgba(0, 229, 255, 0.35)' },
+          '0%, 100%': { boxShadow: '0 0 0 rgba(0, 219, 233, 0.2)' },
+          '50%': { boxShadow: '0 0 26px rgba(0, 219, 233, 0.35)' },
         },
         shooting: {
           '0%': { transform: 'translate3d(0, 0, 0) scale(0.4)', opacity: '0' },

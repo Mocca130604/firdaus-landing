@@ -1,64 +1,83 @@
 <script setup>
-import { ArrowRight, ChevronDown } from 'lucide-vue-next'
+import { ArrowRight } from 'lucide-vue-next'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 defineProps({
   name: String,
   role: String,
   intro: String,
 })
+
+const tiltRef = ref(null)
+let targetRotateY = 0
+let targetRotateX = 0
+let currentRotateY = 0
+let currentRotateX = 0
+let rafId = null
+
+const handleMouseMove = (e) => {
+  // Calculate target rotation degrees (max 15 deg)
+  targetRotateY = ((window.innerWidth / 2 - e.clientX) / window.innerWidth) * 30 // -15 to 15
+  targetRotateX = -((window.innerHeight / 2 - e.clientY) / window.innerHeight) * 30 // -15 to 15
+}
+
+const updateTilt = () => {
+  if (tiltRef.value) {
+    currentRotateY += (targetRotateY - currentRotateY) * 0.08
+    currentRotateX += (targetRotateX - currentRotateX) * 0.08
+    tiltRef.value.style.transform = `rotateY(${currentRotateY}deg) rotateX(${currentRotateX}deg)`
+  }
+  rafId = requestAnimationFrame(updateTilt)
+}
+
+onMounted(() => {
+  window.addEventListener('mousemove', handleMouseMove, { passive: true })
+  rafId = requestAnimationFrame(updateTilt)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('mousemove', handleMouseMove)
+  if (rafId) cancelAnimationFrame(rafId)
+})
 </script>
 
 <template>
-  <section class="section-frame min-h-[calc(100vh-8rem)] rounded-[2rem] px-6 py-10 sm:px-8 lg:px-12">
-    <div
-      class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(124,157,255,0.22),transparent_30%),radial-gradient(circle_at_70%_30%,rgba(0,229,255,0.12),transparent_24%),radial-gradient(circle_at_80%_80%,rgba(155,140,255,0.16),transparent_28%)]" />
-    <div class="relative grid min-h-[78vh] items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+  <section class="min-h-[calc(100vh-10rem)] flex items-center pt-10 overflow-hidden px-gutter max-w-container-max mx-auto" id="home">
+    <div class="grid lg:grid-cols-2 gap-stack-lg items-center relative z-10 w-full">
       <div>
-        <p class="font-display text-sm uppercase tracking-[0.45em] text-glow-cyan/80">Galaxy Journey</p>
-        <h1 class="mt-5 max-w-3xl font-display text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl">
-          {{ name }}
-        </h1>
-        <p class="mt-4 text-xl text-glow-primary sm:text-2xl">{{ role }}</p>
-        <p class="mt-6 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
-          {{ intro }}
+        <h2 class="font-label-caps text-primary mb-4 tracking-[0.3em] uppercase">Available for missions</h2>
+        <h1 class="font-display text-display mb-6 leading-tight text-glow">Firdaus <br><span class="text-secondary-fixed-dim">Mochamad</span></h1>
+        <p class="font-body-lg text-on-surface-variant max-w-xl mb-10">
+          A Frontend Developer with 3+ years of expertise in crafting high-performance, immersive digital experiences. Engineering the future of the web with Vue.js, React, and precision-coded interfaces.
         </p>
-
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#projects"
-            class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-glow-primary to-glow-cyan px-6 py-3 text-sm font-semibold text-space-950 transition hover:shadow-[0_0_28px_rgba(0,229,255,0.4)]">
-            View Projects
+        <div class="flex flex-wrap gap-4">
+          <a href="#projects" class="px-8 py-4 bg-primary text-on-primary font-headline-md text-body-md font-bold rounded-lg hover:shadow-[0_0_24px_rgba(189,0,255,0.45)] transition-all flex items-center gap-2">
+            View Missions
             <ArrowRight class="h-4 w-4" />
           </a>
-          <a href="#contact"
-            class="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm text-white/80 transition hover:border-glow-cyan/30 hover:text-white">
-            Contact Me
-          </a>
+          <a href="#contact" class="px-8 py-4 border border-secondary-fixed-dim text-secondary-fixed-dim font-headline-md text-body-md font-bold rounded-lg hover:bg-secondary-fixed-dim/10 transition-all">Initiate Contact</a>
         </div>
       </div>
-
-      <div class="relative flex justify-center">
-        <div
-          class="absolute inset-8 rounded-full bg-gradient-to-br from-glow-primary/20 via-transparent to-glow-cyan/20 blur-3xl" />
-        <div
-          class="relative flex h-[440px] w-[320px] animate-drift items-center justify-center rounded-[45%] border border-white/10 bg-white/5 shadow-panel backdrop-blur-md">
-          <div class="absolute inset-6 rounded-[44%] border border-white/10" />
-          <div
-            class="absolute top-12 h-24 w-24 rounded-full bg-gradient-to-br from-glow-secondary/70 to-glow-primary/20 blur-2xl" />
-          <div class="relative flex flex-col items-center">
-            <div class="relative h-28 w-28 rounded-full bg-gradient-to-b from-white via-slate-200 to-slate-500">
-              <div class="absolute inset-x-3 top-5 h-10 rounded-full bg-space-950/90" />
-              <div
-                class="absolute left-1/2 top-12 h-14 w-16 -translate-x-1/2 rounded-[45%] bg-gradient-to-b from-white/90 to-slate-300" />
-            </div>
-            <div class="mt-3 h-32 w-24 rounded-[40%] bg-gradient-to-b from-slate-200 to-slate-400" />
-            <div class="absolute left-1/2 top-40 h-40 w-40 -translate-x-1/2 rounded-full border border-glow-cyan/15" />
+      <div class="hidden lg:flex justify-center items-center relative">
+        <!-- Tilt Wrapper -->
+        <div ref="tiltRef" class="transition-transform duration-75 ease-out" style="perspective: 1000px; transform-style: preserve-3d;">
+          <!-- Circular Orbit Graphic -->
+          <div class="orbit-container">
+            <div class="orbit-item" style="top: 0%; left: 50%; transform: translate(-50%, -50%);"><span class="material-symbols-outlined text-secondary-fixed-dim">javascript</span></div>
+            <div class="orbit-item" style="top: 25%; left: 93%; transform: translate(-50%, -50%);"><span class="material-symbols-outlined text-secondary-fixed-dim">data_object</span></div>
+            <div class="orbit-item" style="top: 75%; left: 93%; transform: translate(-50%, -50%);"><span class="material-symbols-outlined text-secondary-fixed-dim">code</span></div>
+            <div class="orbit-item" style="top: 100%; left: 50%; transform: translate(-50%, -50%);"><span class="material-symbols-outlined text-secondary-fixed-dim">css</span></div>
+            <div class="orbit-item" style="top: 75%; left: 7%; transform: translate(-50%, -50%);"><span class="material-symbols-outlined text-secondary-fixed-dim">html</span></div>
+            <div class="orbit-item" style="top: 25%; left: 7%; transform: translate(-50%, -50%);"><span class="material-symbols-outlined text-secondary-fixed-dim">terminal</span></div>
           </div>
-          <div class="absolute bottom-8 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-white/50">
-            Scroll to Explore
-            <ChevronDown class="h-4 w-4 text-glow-cyan" />
-          </div>
+        </div>
+        <!-- Center Core -->
+        <div class="absolute w-32 h-32 rounded-full bg-primary/20 backdrop-blur-2xl border border-primary/40 flex items-center justify-center animate-pulse">
+          <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+

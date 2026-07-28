@@ -77,7 +77,7 @@ onUnmounted(() => {
 <template>
   <div class="pointer-events-none fixed inset-0 -z-20 overflow-hidden">
     <canvas ref="canvasRef" class="absolute inset-0" />
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(124,157,255,0.16),transparent_28%),radial-gradient(circle_at_20%_80%,rgba(0,229,255,0.08),transparent_24%),radial-gradient(circle_at_80%_30%,rgba(155,140,255,0.12),transparent_30%)]" />
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(189,0,255,0.12),transparent_30%),radial-gradient(circle_at_20%_80%,rgba(0,240,255,0.08),transparent_25%),radial-gradient(circle_at_80%_30%,rgba(189,0,255,0.1),transparent_30%)]" />
     <div
       v-for="(star, index) in shootingStars"
       :key="index"

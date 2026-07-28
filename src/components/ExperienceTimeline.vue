@@ -50,17 +50,17 @@ onMounted(() => {
       class="group relative mb-10 last:mb-0"
     >
       <div
-        class="absolute -left-[42px] top-3 flex h-7 w-7 items-center justify-center rounded-full border border-glow-cyan/40 bg-space-900 transition duration-500"
-        :class="visibleItems.includes(index) ? 'shadow-[0_0_24px_rgba(0,229,255,0.45)]' : 'shadow-none'"
+        class="absolute -left-[42px] top-3 flex h-7 w-7 items-center justify-center rounded-full border border-secondary-fixed-dim/40 bg-space-900 transition duration-500"
+        :class="visibleItems.includes(index) ? 'shadow-[0_0_24px_rgba(0,240,255,0.45)]' : 'shadow-none'"
       >
-        <div class="h-2.5 w-2.5 rounded-full bg-glow-cyan" />
+        <div class="h-2.5 w-2.5 rounded-full bg-secondary-fixed-dim" />
       </div>
 
-      <div class="glass-panel rounded-3xl p-5 transition duration-300 group-hover:-translate-y-1 group-hover:border-white/15">
+      <div class="glass-panel p-6 rounded-2xl border border-primary/20 transition-all duration-300 group-hover:-translate-y-1 hover:scale-[1.01]">
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p class="font-display text-xl font-semibold text-white">{{ item.company }}</p>
-            <p class="text-sm uppercase tracking-[0.25em] text-glow-cyan/80">{{ item.role }}</p>
+            <p class="font-label-caps text-secondary-fixed-dim uppercase tracking-[0.25em] text-xs mt-1">{{ item.role }}</p>
           </div>
           <p class="text-sm text-white/50">{{ item.period }}</p>
         </div>
@@ -71,14 +71,14 @@ onMounted(() => {
             <span
               v-for="tech in item.techStack?.slice(0, 3)"
               :key="tech"
-              class="rounded-full border border-glow-cyan/20 bg-glow-cyan/8 px-3 py-1 text-xs text-glow-cyan shadow-[0_0_18px_rgba(0,229,255,0.08)]"
+              class="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs text-primary font-bold uppercase"
             >
               {{ tech }}
             </span>
           </div>
           <button
             type="button"
-            class="inline-flex items-center justify-center gap-2 rounded-full border border-glow-cyan/25 bg-glow-cyan/10 px-4 py-2 text-sm font-medium text-white transition hover:border-glow-cyan/45 hover:bg-glow-cyan/15"
+            class="inline-flex items-center justify-center gap-2 rounded-full border border-secondary-fixed-dim/25 bg-secondary-fixed-dim/10 px-4 py-2 text-sm font-medium text-white transition hover:border-secondary-fixed-dim/45 hover:bg-secondary-fixed-dim/15"
             @click="toggleItem(index)"
           >
             {{ isExpanded(index) ? 'Hide Details' : 'View Details' }}
@@ -110,7 +110,7 @@ onMounted(() => {
                       :key="project"
                       class="flex gap-3 text-sm leading-7 text-white/72"
                     >
-                      <span class="mt-2 h-2 w-2 rounded-full bg-glow-cyan/80" />
+                      <span class="mt-2 h-2 w-2 rounded-full bg-secondary-fixed-dim/80" />
                       <span>{{ project }}</span>
                     </li>
                   </ul>
@@ -132,13 +132,13 @@ onMounted(() => {
               </div>
 
               <div class="space-y-5">
-                <div class="rounded-[1.5rem] border border-glow-cyan/15 bg-glow-cyan/5 p-4">
-                  <p class="text-xs uppercase tracking-[0.28em] text-glow-cyan/75">Tech Stack</p>
-                  <div class="mt-4 flex flex-wrap gap-2">
+                <div class="rounded-xl border border-primary/20 bg-primary/5 p-4">
+                  <p class="font-label-caps text-xs text-primary uppercase mb-3">Tech Stack</p>
+                  <div class="flex flex-wrap gap-2">
                     <span
                       v-for="tech in item.techStack"
                       :key="tech"
-                      class="rounded-full border border-glow-cyan/25 bg-space-950/70 px-3 py-1 text-xs text-glow-cyan shadow-[0_0_18px_rgba(0,229,255,0.12)]"
+                      class="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs text-primary font-bold uppercase"
                     >
                       {{ tech }}
                     </span>

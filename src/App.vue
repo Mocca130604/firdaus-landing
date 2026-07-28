@@ -13,7 +13,6 @@ import ProjectsSection from './sections/ProjectsSection.vue'
 import SkillsSection from './sections/SkillsSection.vue'
 
 const isReady = ref(false)
-const mouse = ref({ x: 0, y: 0 })
 const intro = 'Frontend Developer with 3+ years of experience specializing in Vue.js and Nuxt.js, building scalable web applications and modular frontend architectures. Experienced in developing responsive interfaces, microfrontend systems, and performance-focused applications using modern JavaScript, Tailwind CSS, and Laravel APIs.'
 
 const aboutStats = [
@@ -466,16 +465,28 @@ const socialLinks = [
   { icon: Linkedin, label: 'Linkedin', value: 'More Information', href: 'https://www.linkedin.com/in/firdaus-mochamad-a7809a205/' }
 ]
 
+const mouse = ref({ x: 0, y: 0 })
+let targetX = 0
+let targetY = 0
+let currentX = 0
+let currentY = 0
+let rafId = null
+
 const parallaxStyle = computed(() => ({
   transform: `translate3d(${mouse.value.x * 14}px, ${mouse.value.y * 14}px, 0)`,
 }))
 
 const onMouseMove = (event) => {
   const { innerWidth, innerHeight } = window
-  mouse.value = {
-    x: (event.clientX / innerWidth - 0.5) * 1.2,
-    y: (event.clientY / innerHeight - 0.5) * 1.2,
-  }
+  targetX = (event.clientX / innerWidth - 0.5) * 1.2
+  targetY = (event.clientY / innerHeight - 0.5) * 1.2
+}
+
+const updateParallax = () => {
+  currentX += (targetX - currentX) * 0.08
+  currentY += (targetY - currentY) * 0.08
+  mouse.value = { x: currentX, y: currentY }
+  rafId = requestAnimationFrame(updateParallax)
 }
 
 const handleLoaded = () => {
@@ -490,39 +501,44 @@ const handleLoaded = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('mousemove', onMouseMove, { passive: true })
+  rafId = requestAnimationFrame(updateParallax)
 })
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', onMouseMove)
+  if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
 
 <template>
-  <div class="relative min-h-screen overflow-x-hidden bg-space-950 text-glow-text">
+  <div class="relative min-h-screen overflow-x-hidden bg-space-950 font-body-md text-glow-text selection:bg-primary-container selection:text-on-primary-container">
     <GalaxyBackground />
     <RocketLoader v-if="!isReady" @complete="handleLoaded" />
     <ScrollRadar v-else />
 
-    <div class="pointer-events-none fixed inset-0 -z-10 bg-nebula-soft opacity-90 transition-transform duration-300"
+    <div class="nebula-glow transition-transform duration-300"
       :style="parallaxStyle" />
 
     <div v-if="isReady" class="relative z-10">
-      <header class="sticky top-0 z-30 border-b border-white/5 bg-space-950/50 backdrop-blur-xl">
-        <div class="mx-auto flex items-center justify-between px-6 py-4 lg:px-10">
-          <a href="#hero" class="font-display text-lg font-bold tracking-[0.22em] text-white">
+      <header class="fixed top-0 left-0 w-full z-50 bg-space-900/80 backdrop-blur-xl border-b border-primary-container/20 shadow-[0_0_20px_rgba(189,0,255,0.1)]">
+        <div class="mx-auto flex items-center justify-between px-gutter py-4 max-w-container-max">
+          <a href="#hero" class="font-display text-2xl font-extrabold bg-gradient-to-r from-primary-fixed-dim to-secondary-fixed-dim bg-clip-text text-transparent">
             FIRDAUS MOCHAMAD
           </a>
-          <nav class="hidden items-center gap-6 md:flex">
+          <nav class="hidden items-center gap-stack-lg md:flex">
             <a v-for="item in navItems" :key="item.label" :href="item.href"
-              class="text-sm text-white/70 transition hover:text-glow-cyan">
+              class="font-display text-body-md font-bold uppercase tracking-wider text-on-surface hover:text-primary transition-colors duration-300">
               {{ item.label }}
             </a>
           </nav>
+          <button class="bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-container px-6 py-2 rounded-lg font-headline-md text-sm font-bold scale-100 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20">
+            Resume
+          </button>
         </div>
       </header>
 
-      <main class="mx-auto flex flex-col gap-10 px-4 pb-16 pt-8 sm:px-6 lg:px-10">
+      <main class="relative z-10 mx-auto flex flex-col gap-stack-lg px-gutter max-w-container-max pb-16 pt-28">
         <HeroSection id="hero" class="journey-section" name="Firdaus Mochamad" role="Frontend Developer" :intro="intro" />
 
         <AboutSection id="about" class="journey-section" :stats="aboutStats" />
