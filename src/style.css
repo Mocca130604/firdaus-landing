@@ -314,6 +314,58 @@ body {
   color: var(--color-cyan);
 }
 
+/* Language Selector */
+.hud-lang-selector {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  gap: 2px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-dim);
+  padding: 0.32rem 0.55rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+}
+
+.lang-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.lang-btn.active {
+  background: linear-gradient(135deg, var(--color-accent), #ff5463);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(230, 57, 70, 0.45);
+}
+
+@media (max-width: 480px) {
+  .hud-lang-selector {
+    padding: 1px;
+    gap: 1px;
+  }
+  .lang-btn {
+    padding: 0.26rem 0.42rem;
+    font-size: 0.64rem;
+  }
+  .hud-btn {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.68rem;
+  }
+}
+
 /* SIDE ALTITUDE PROGRESS BAR */
 .hud-altitude-bar {
   position: fixed;

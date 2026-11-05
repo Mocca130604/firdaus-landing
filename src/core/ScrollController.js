@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getI18n } from '../config/i18n.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -104,37 +105,27 @@ export class ScrollController {
   //  Auto-Scroll (Cinematic Mode)
   // ─────────────────────────────────────────────────────────────────────────────
 
+  /** Attach listener to auto-scroll button rendered in HUD */
+  bindAutoScrollButton() {
+    const btn = document.getElementById('btn-autoscroll');
+    if (!btn) return;
+    btn.onclick = () => this.toggleAutoScroll();
+    this._updateAutoBtn(this._auto.active);
+  }
+
   /**
-   * Inject the auto-scroll play/pause button into the HUD.
-   * Called once from the constructor; waits for DOM to be ready via rAF.
+   * Auto-Scroll injection / initial binding
    */
   _initAutoScrollButton() {
-    const inject = () => {
-      // Try to attach after UIOverlay has built the DOM
-      const controls = document.querySelector('.hud-controls');
-      if (!controls) {
-        // DOM not ready yet — retry next frame
-        requestAnimationFrame(inject);
+    const checkAndBind = () => {
+      const btn = document.getElementById('btn-autoscroll');
+      if (btn) {
+        this.bindAutoScrollButton();
         return;
       }
-
-      // Avoid double-inject (HMR)
-      if (document.getElementById('btn-autoscroll')) return;
-
-      const btn = document.createElement('button');
-      btn.id = 'btn-autoscroll';
-      btn.className = 'hud-btn autoscroll-btn';
-      btn.setAttribute('aria-label', 'Toggle Auto-Scroll Cinematic Mode');
-      btn.setAttribute('title', 'Auto-Scroll: plays the full journey automatically');
-      btn.innerHTML = `<span class="autoscroll-icon">▶</span><span class="autoscroll-label">AUTO</span>`;
-
-      btn.addEventListener('click', () => this.toggleAutoScroll());
-
-      // Insert before the audio button
-      controls.insertBefore(btn, controls.firstChild);
+      requestAnimationFrame(checkAndBind);
     };
-
-    requestAnimationFrame(inject);
+    requestAnimationFrame(checkAndBind);
   }
 
   /** Toggle between play and pause */
@@ -215,12 +206,13 @@ export class ScrollController {
   }
 
   _updateAutoBtn(isPlaying) {
-    const btn  = document.getElementById('btn-autoscroll');
+    const btn = document.getElementById('btn-autoscroll');
     if (!btn) return;
-    const icon  = btn.querySelector('.autoscroll-icon');
+    const icon = btn.querySelector('.autoscroll-icon');
     const label = btn.querySelector('.autoscroll-label');
-    if (icon)  icon.textContent  = isPlaying ? '⏸' : '▶';
-    if (label) label.textContent = isPlaying ? 'PAUSE' : 'AUTO';
+    const hud = getI18n().hud;
+    if (icon) icon.textContent = isPlaying ? '⏸' : '▶';
+    if (label) label.textContent = isPlaying ? hud.pause : hud.auto;
     btn.classList.toggle('autoscroll-active', isPlaying);
   }
 
@@ -292,13 +284,14 @@ export class ScrollController {
   }
 
   calculateVelocityDisplay(p) {
-    if (p < 0.02) return 'Mach 0 (Pre-Launch)';
-    if (p < 0.1)  return 'Mach 2.4 (Ascending)';
-    if (p < 0.25) return 'Mach 9.8 (Hypersonic)';
-    if (p < 0.45) return '7.8 km/s (Orbital)';
-    if (p < 0.8)  return '11.2 km/s (Lunar Transit)';
-    if (p < 0.95) return '1.6 km/s (Lunar Descent)';
-    return '0 km/s (Touchdown)';
+    const v = getI18n().hud.velocities;
+    if (p < 0.02) return v.preLaunch;
+    if (p < 0.1)  return v.ascending;
+    if (p < 0.25) return v.hypersonic;
+    if (p < 0.45) return v.orbital;
+    if (p < 0.8)  return v.lunarTransit;
+    if (p < 0.95) return v.lunarDescent;
+    return v.touchdown;
   }
 
   scrollToSection(sectionId) {
