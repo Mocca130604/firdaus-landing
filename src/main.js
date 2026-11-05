@@ -6,6 +6,8 @@ import { EarthJapanScene } from './scenes/EarthJapanScene.js';
 import { AtmosphereScene } from './scenes/AtmosphereScene.js';
 import { SpaceScene } from './scenes/SpaceScene.js';
 import { MoonScene } from './scenes/MoonScene.js';
+import { PlanetaryScene } from './scenes/PlanetaryScene.js';
+import { ExplorationManager } from './core/ExplorationManager.js';
 import { Rocket } from './components/Rocket.js';
 import { ParticleSystem } from './components/ParticleSystem.js';
 import { UIOverlay } from './components/UIOverlay.js';
@@ -54,6 +56,10 @@ class App {
     this.moon = new MoonScene();
     this.sceneManager.scene.add(this.moon.group);
 
+    // 2b. Planetary Sector (Exploration Mode)
+    this.planetaryScene = new PlanetaryScene();
+    this.sceneManager.scene.add(this.planetaryScene.group);
+
     // 3. Rocket Component
     this.rocket = new Rocket();
     this.sceneManager.scene.add(this.rocket.group);
@@ -74,7 +80,20 @@ class App {
     // 6. UI Overlay
     this.uiOverlay = new UIOverlay(this.scrollController);
 
-    // 7. Loading Screen & Countdown
+    // 7. Exploration Manager
+    this.explorationManager = new ExplorationManager({
+      sceneManager: this.sceneManager,
+      scrollController: this.scrollController,
+      uiOverlay: this.uiOverlay,
+      rocket: this.rocket,
+      planetaryScene: this.planetaryScene,
+      particleSystem: this.particleSystem,
+    });
+    this.uiOverlay.setExplorationCallback(() => {
+      this.explorationManager.enterExplorationMode();
+    });
+
+    // 8. Loading Screen & Countdown
     this.handleLoadingSequence();
 
     // 8. Start Animation Loop
@@ -172,29 +191,40 @@ class App {
 
     const delta = Math.min(this.clock.getDelta(), 0.1);
 
-    // Update Scroll Controller
-    this.scrollController.update(delta);
+    if (this.explorationManager && this.explorationManager.isExplorationMode) {
+      // ── Planetary Exploration Mode Update Loop ──────────────────────
+      this.explorationManager.update(delta);
 
-    // Update Rocket position
-    this.rocket.group.position.y = this.currentRocketY;
-    this.rocket.update(this.currentScrollProgress, this.currentScrollVelocity, delta);
+      // Thruster particle emissions in free flight
+      const nozzlePositions = this.rocket.getThrusterWorldPositions();
+      const isThrusting = this.explorationManager.flightController.keys.forward || this.explorationManager.flightController.mouse.isDown;
+      const thrustIntensity = isThrusting ? (this.explorationManager.flightController.keys.boost ? 1.8 : 1.0) : 0.18;
+      this.particleSystem.update(delta, nozzlePositions, thrustIntensity, this.rocket.group.position.y);
+    } else {
+      // ── Standard Story Scroll Mode Update Loop ──────────────────────
+      this.scrollController.update(delta);
 
-    // Update Camera tracking
-    this.sceneManager.updateCamera(this.rocket.group.position, this.currentScrollVelocity, delta);
+      // Update Rocket position
+      this.rocket.group.position.y = this.currentRocketY;
+      this.rocket.update(this.currentScrollProgress, this.currentScrollVelocity, delta);
 
-    // Update Sky & Lighting
-    this.sceneManager.updateSkyGradient(this.currentScrollProgress);
-    this.lighting.update(this.currentScrollProgress, this.sceneManager.camera.position.y);
+      // Update Camera tracking
+      this.sceneManager.updateCamera(this.rocket.group.position, this.currentScrollVelocity, delta);
 
-    // Update Thruster & Sakura Particles
-    const nozzlePositions = this.rocket.getThrusterWorldPositions();
-    const thrustIntensity = Math.min(1.2, 0.4 + Math.abs(this.currentScrollVelocity) * 0.2);
-    this.particleSystem.update(delta, nozzlePositions, thrustIntensity, this.currentRocketY);
+      // Update Sky & Lighting
+      this.sceneManager.updateSkyGradient(this.currentScrollProgress);
+      this.lighting.update(this.currentScrollProgress, this.sceneManager.camera.position.y);
 
-    // Update Environment Scenes
-    this.atmosphere.update(delta);
-    this.space.update(delta);
-    this.moon.update(delta);
+      // Update Thruster & Sakura Particles
+      const nozzlePositions = this.rocket.getThrusterWorldPositions();
+      const thrustIntensity = Math.min(1.2, 0.4 + Math.abs(this.currentScrollVelocity) * 0.2);
+      this.particleSystem.update(delta, nozzlePositions, thrustIntensity, this.currentRocketY);
+
+      // Update Environment Scenes
+      this.atmosphere.update(delta);
+      this.space.update(delta);
+      this.moon.update(delta);
+    }
 
     // Render Scene with Post-Processing Bloom
     this.sceneManager.render();

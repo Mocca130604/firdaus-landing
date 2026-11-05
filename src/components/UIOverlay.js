@@ -16,8 +16,9 @@ import {
  * multi-language switcher (EN, ID, JA), and interactive controls.
  */
 export class UIOverlay {
-  constructor(scrollController) {
+  constructor(scrollController, options = {}) {
     this.scrollController = scrollController;
+    this.onToggleExploration = options.onToggleExploration || null;
     this.container = document.getElementById('ui-overlay');
     this.loadingScreen = document.getElementById('loading-screen');
     this.currentLang = getCurrentLang();
@@ -30,6 +31,11 @@ export class UIOverlay {
     });
 
     this.render();
+  }
+
+  setExplorationCallback(callback) {
+    this.onToggleExploration = callback;
+    this.initExplorationButton();
   }
 
   render() {
@@ -79,6 +85,12 @@ export class UIOverlay {
             <button class="lang-btn ${this.currentLang === 'id' ? 'active' : ''}" data-lang="id" title="Bahasa Indonesia">ID</button>
             <button class="lang-btn ${this.currentLang === 'ja' ? 'active' : ''}" data-lang="ja" title="日本語">JA</button>
           </div>
+
+          <!-- PLANETARY EXPLORATION BUTTON -->
+          <button id="btn-planetary-explore" class="hud-btn explore-btn" aria-label="Toggle Planetary Exploration Mode" title="Planetary Free Flight">
+            <span class="explore-icon">🛸</span>
+            <span class="explore-label">${t.exploration?.btnExplore || 'EXPLORE'}</span>
+          </button>
 
           <!-- AUTO-SCROLL BUTTON -->
           <button id="btn-autoscroll" class="hud-btn autoscroll-btn" aria-label="Toggle Auto-Scroll Cinematic Mode" title="Auto-Scroll: plays the full journey automatically">
@@ -686,6 +698,7 @@ export class UIOverlay {
     this.initContactModal();
     this.initLanyardTilt();
     this.initLanguageSelector();
+    this.initExplorationButton();
 
     // Rebind autoscroll button
     if (this.scrollController?.bindAutoScrollButton) {
@@ -710,6 +723,17 @@ export class UIOverlay {
         }
       });
     });
+  }
+
+  initExplorationButton() {
+    const btn = document.getElementById('btn-planetary-explore');
+    if (!btn) return;
+    btn.onclick = (e) => {
+      e.preventDefault();
+      if (this.onToggleExploration) {
+        this.onToggleExploration();
+      }
+    };
   }
 
   initAudioToggle() {

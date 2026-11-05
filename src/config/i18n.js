@@ -175,6 +175,44 @@ export const translations = {
       success: (email) => `✓ TRANSMISSION CONFIRMED // Signal received successfully! Firdaus will respond to <strong>${email}</strong> shortly.`,
       error: (err, email, subject, message) => `⚠ TRANSMISSION ERROR: ${err}. Direct dispatch available at <a href="mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}">${email}</a>`,
     },
+    exploration: {
+      btnExplore: '🛸 PLANETARY EXPLORE',
+      btnExit: '✕ EXIT TO STORY',
+      controlsHint: 'MOUSE / WASD: STEER • CLICK / W: THRUST • SPACE: BOOST',
+      breakOrbit: 'BREAK ORBIT',
+      viewDossier: 'VIEW DOSSIER',
+      distUnit: 'KM',
+      orbitStatus: '● IN GRAVITY ORBIT',
+      cruisingStatus: 'CRUISING SECTOR',
+      radarTitle: '3D SECTOR RADAR',
+      planets: {
+        about: {
+          name: 'TERRA YOKOHAMA',
+          sub: 'BASE STATION // ORIGIN',
+          desc: 'Spaceport origins in Japan. Enterprise frontend leadership, full-stack architectures, and AI MCP integrations.',
+        },
+        skills: {
+          name: 'PLANET ARSENAL',
+          sub: 'ORBITAL RING // TECH STACK',
+          desc: 'Technical arsenal: Vue.js, Nuxt, React, Laravel, TypeScript, Three.js, and Model Context Protocol (MCP).',
+        },
+        experience: {
+          name: 'PLANET ODYSSEY',
+          sub: 'CRIMSON STATION // CAREER STAGES',
+          desc: '4+ years of flight stages: SIDIGS (Mobile/EdTech), GLOBY (Ticketing), and Datasea (Enterprise Base Product).',
+        },
+        projects: {
+          name: 'PLANET ENTERPRISE',
+          sub: 'CYAN HUB // MISSION DOSSIERS',
+          desc: 'Flagship systems deployed: KraftHeinz TMS, BUMA Micro Frontends, and EVOQ E-Procurement platforms.',
+        },
+        contact: {
+          name: 'THE MOON',
+          sub: 'MARE TRANQUILLITATIS // TERMINAL',
+          desc: 'Lunar touchdown completed. Official clearance pass & direct encrypted EmailJS transmission channel.',
+        },
+      },
+    },
   },
 
   id: {
@@ -345,6 +383,44 @@ export const translations = {
       success: (email) => `✓ TRANSMISI TERKONFIRMASI // Sinyal berhasil diterima! Firdaus akan segera membalas ke <strong>${email}</strong>.`,
       error: (err, email, subject, message) => `⚠ GANGGUAN TRANSMISI: ${err}. Pengiriman langsung dapat melalui <a href="mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}">${email}</a>`,
     },
+    exploration: {
+      btnExplore: '🛸 JELAJAH PLANET',
+      btnExit: '✕ KEMBALI KE CERITA',
+      controlsHint: 'MOUSE / WASD: KEMUDI • KLIK / W: GAS • SPASI: BOOST',
+      breakOrbit: 'TINGGALKAN ORBIT',
+      viewDossier: 'LIHAT BERKAS',
+      distUnit: 'KM',
+      orbitStatus: '● DALAM ORBIT GRAVITASI',
+      cruisingStatus: 'JELAJAH SEKTOR',
+      radarTitle: 'RADAR 3D SEKTOR',
+      planets: {
+        about: {
+          name: 'TERRA YOKOHAMA',
+          sub: 'STASIUN BASIS // PROFIL',
+          desc: 'Titik awal peluncuran Jepang. Kepemimpinan frontend enterprise, arsitektur full-stack, dan inovasi AI MCP.',
+        },
+        skills: {
+          name: 'PLANET ARSENAL',
+          sub: 'CINCIN ORBIT // KEAHLIAN',
+          desc: 'Persenjataan teknologi: Vue.js, Nuxt, React, Laravel, TypeScript, Three.js, dan Model Context Protocol (MCP).',
+        },
+        experience: {
+          name: 'PLANET ODYSSEY',
+          sub: 'STASIUN MERAH // PERJALANAN KARIER',
+          desc: 'Tahapan karier 4+ tahun: SIDIGS (Mobile/EdTech), GLOBY (Ticketing), dan Datasea (Enterprise Base Product).',
+        },
+        projects: {
+          name: 'PLANET ENTERPRISE',
+          sub: 'HUB CYAN // BERKAS PROYEK',
+          desc: 'Sistem produksi enterprise: TMS KraftHeinz, Micro Frontend BUMA, dan platform E-Procurement EVOQ.',
+        },
+        contact: {
+          name: 'BULAN (THE MOON)',
+          sub: 'MARE TRANQUILLITATIS // TERMINAL',
+          desc: 'Pendaratan Bulan sukses. Paspor resmi misi lunar & transmisi langsung terenkripsi melalui EmailJS.',
+        },
+      },
+    },
   },
 
   ja: {
@@ -514,6 +590,44 @@ export const translations = {
       loading: '⏳ EMAILJSプロトコル経由で信号送信中...',
       success: (email) => `✓ 送信確認完了 // シグナルが正常に受信されました！フィルダウスより <strong>${email}</strong> へ速やかにご返信いたします。`,
       error: (err, email, subject, message) => `⚠ 送信エラー: ${err}。直接のご連絡は <a href="mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}">${email}</a> までお願いいたします。`,
+    },
+    exploration: {
+      btnExplore: '🛸 惑星探査モード',
+      btnExit: '✕ ストーリーに戻る',
+      controlsHint: 'マウス / WASD: 操縦 • クリック / W: 推進 • スペース: 加速',
+      breakOrbit: '軌道離脱',
+      viewDossier: '詳細ドキュメント',
+      distUnit: 'KM',
+      orbitStatus: '● 惑星重力圏に投入',
+      cruisingStatus: '通常巡航中',
+      radarTitle: '3Dセクターレーダー',
+      planets: {
+        about: {
+          name: 'テラ・横浜 (TERRA YOKOHAMA)',
+          sub: '地上発射基地 // 自己紹介',
+          desc: '日本宇宙港からの出発。大規模エンタープライズフロントエンド統括、フルスタック設計、AI MCP統合。',
+        },
+        skills: {
+          name: 'アーセナル星 (PLANET ARSENAL)',
+          sub: '軌道リング // 技術スタック',
+          desc: '開発兵装: Vue.js, Nuxt, React, Laravel, TypeScript, Three.js, Model Context Protocol (MCP)。',
+        },
+        experience: {
+          name: 'オデッセイ星 (PLANET ODYSSEY)',
+          sub: '深紅ステーション // キャリア経歴',
+          desc: '4年以上の歩み: SIDIGS（EdTech/Mobile）、GLOBY（チケッティング）、Datasea（調達基盤/MCP）。',
+        },
+        projects: {
+          name: 'エンタープライズ星 (PLANET ENTERPRISE)',
+          sub: 'シアンハブ // プロジェクト実績',
+          desc: '本番稼働システム: KraftHeinz TMS、BUMAマイクロフロントエンド、EVOQ調達プラットフォーム。',
+        },
+        contact: {
+          name: '月面基地 (THE MOON)',
+          sub: '静かの海 // 通信ターミナル',
+          desc: '月面軟着陸完了。公式月面クルーアクセスパスおよびEmailJS暗号化ダイレクト通信リンク。',
+        },
+      },
     },
   },
 };
@@ -1016,3 +1130,4 @@ export function getLocalizedEducation(lang = null) {
   const current = lang || getCurrentLang();
   return localizedEducation[current] || localizedEducation.en;
 }
+
