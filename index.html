@@ -1,19 +1,57 @@
-<!doctype html>
-<html class="dark" lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Firdaus Mochamad frontend developer portfolio with a modern galaxy exploration experience."
-    />
-    <title>ASTRA NOVA | Firdaus Mochamad</title>
-    <link rel="icon" href="/favicon.svg" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700;800&amp;family=Geist:wght@500;700&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Firdaus Mochamad — The Journey (Japan to the Moon)</title>
+  <meta name="description" content="Portfolio interaktif 3D Firdaus Mochamad — Frontend & Full-Stack Developer. Perjalanan roket dari Jepang menuju Bulan dengan Three.js, GSAP, dan Vite.">
+  <meta name="theme-color" content="#0a0e17">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Firdaus Mochamad — The Journey (Japan to the Moon)">
+  <meta property="og:description" content="Interactive 3D Portfolio exploring enterprise engineering, micro-frontends, and AI from Japan to the Moon.">
+
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <!-- 3D Canvas Layer -->
+  <div id="webgl-container" aria-hidden="true"></div>
+
+  <!-- Loading Screen & Mission Countdown -->
+  <div class="loading-screen" id="loading-screen" role="dialog" aria-modal="true" aria-label="Mission Briefing and Countdown">
+    <div class="loading-content">
+      <div class="mission-badge">MISSION BRIEFING // JAXA-STYLE EXPEDITION</div>
+      <h1 class="loading-title">THE JOURNEY</h1>
+      <p class="loading-subtitle">
+        Perjalanan interaktif roket dari landasan Jepang menuju Bulan.<br>
+        Portofolio Frontend & Full-Stack Developer — <strong>Firdaus Mochamad</strong>.
+      </p>
+
+      <div class="countdown-box">
+        <div class="countdown-number" id="countdown-display">3</div>
+        <span class="countdown-label">T-MINUS COUNTDOWN</span>
+      </div>
+
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-fill" id="loading-progress-fill"></div>
+      </div>
+
+      <button class="btn-launch-init" id="btn-init-flight">
+        <span>IGNITION & LAUNCH (MULAI PERJALANAN)</span>
+        <span>🚀</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- UI Overlay for HTML Content & Telemetry HUD -->
+  <div id="ui-overlay"></div>
+
+  <!-- Main Application Script -->
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
+
