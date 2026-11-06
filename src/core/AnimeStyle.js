@@ -50,6 +50,18 @@ export function createAnimeOutline(geometry, width = 0.04, color = 0x070c18) {
   return outlineMesh;
 }
 
+export function addAnimeOutline(mesh, thickness = 0.035, color = 0x090d16) {
+  if (!mesh || !mesh.geometry) return null;
+  const outlineMat = new THREE.MeshBasicMaterial({
+    color: color,
+    side: THREE.BackSide,
+  });
+  const outlineMesh = new THREE.Mesh(mesh.geometry, outlineMat);
+  outlineMesh.scale.set(1 + thickness, 1 + thickness, 1 + thickness);
+  mesh.add(outlineMesh);
+  return outlineMesh;
+}
+
 // 4. Procedural 4-point Anime Twinkle Star Canvas Texture
 export function createAnimeStarTexture() {
   const canvas = document.createElement('canvas');

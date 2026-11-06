@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createAnimeToonMaterial } from '../core/AnimeStyle.js';
+import { createAnimeToonMaterial, addAnimeOutline } from '../core/AnimeStyle.js';
 
 /**
  * Deep Space Scene (Alt 120 - 320)
@@ -140,6 +140,7 @@ export class SpaceScene {
       rockGeo.computeVertexNormals();
 
       const asteroid = new THREE.Mesh(rockGeo, rockMat);
+      addAnimeOutline(asteroid, 0.04, 0x070c18);
 
       const angle = Math.random() * Math.PI * 2;
       const dist = 14 + Math.random() * 45;
@@ -189,6 +190,7 @@ export class SpaceScene {
     // Satellite Main Bus / Body
     const busGeo = new THREE.BoxGeometry(2.0, 3.0, 2.0);
     const bus = new THREE.Mesh(busGeo, goldFoilMat);
+    addAnimeOutline(bus, 0.04, 0x090d16);
     satGroup.add(bus);
 
     // Parabolic Dish Antenna
@@ -196,6 +198,7 @@ export class SpaceScene {
     const dish = new THREE.Mesh(dishGeo, frameMat);
     dish.position.set(0, 2.0, 0);
     dish.rotation.x = Math.PI * 0.2;
+    addAnimeOutline(dish, 0.04, 0x090d16);
     satGroup.add(dish);
 
     // Twin Solar Panel Wings
@@ -205,6 +208,7 @@ export class SpaceScene {
 
       const panelGeo = new THREE.BoxGeometry(4.5, 1.6, 0.08);
       const panel = new THREE.Mesh(panelGeo, solarMat);
+      addAnimeOutline(panel, 0.04, 0x090d16);
       panelGroup.add(panel);
 
       const mountGeo = new THREE.CylinderGeometry(0.08, 0.08, 1.8, 8);

@@ -86,12 +86,6 @@ export class UIOverlay {
             <button class="lang-btn ${this.currentLang === 'ja' ? 'active' : ''}" data-lang="ja" title="日本語">JA</button>
           </div>
 
-          <!-- PLANETARY EXPLORATION BUTTON -->
-          <button id="btn-planetary-explore" class="hud-btn explore-btn" aria-label="Toggle Planetary Exploration Mode" title="Planetary Free Flight">
-            <span class="explore-icon">🛸</span>
-            <span class="explore-label">${t.exploration?.btnExplore || 'EXPLORE'}</span>
-          </button>
-
           <!-- AUTO-SCROLL BUTTON -->
           <button id="btn-autoscroll" class="hud-btn autoscroll-btn" aria-label="Toggle Auto-Scroll Cinematic Mode" title="Auto-Scroll: plays the full journey automatically">
             <span class="autoscroll-icon">▶</span>

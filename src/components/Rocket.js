@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createAnimeToonMaterial, AnimeColors } from '../core/AnimeStyle.js';
+import { createAnimeToonMaterial, AnimeColors, addAnimeOutline } from '../core/AnimeStyle.js';
 
 /**
  * Procedural Stylized Multi-Stage Rocket ("Ryusei-1" / 流星-1)
@@ -45,12 +45,14 @@ export class Rocket {
     lowerCore.position.y = 2.5;
     lowerCore.castShadow = true;
     lowerCore.receiveShadow = true;
+    addAnimeOutline(lowerCore, 0.035, 0x090d16);
     this.group.add(lowerCore);
 
     // Interstage Ring
     const interstageGeo = new THREE.CylinderGeometry(0.86, 0.86, 0.5, 16);
     const interstage = new THREE.Mesh(interstageGeo, darkMaterial);
     interstage.position.y = 5.25;
+    addAnimeOutline(interstage, 0.035, 0x090d16);
     this.group.add(interstage);
 
     // Upper Stage
@@ -58,6 +60,7 @@ export class Rocket {
     const upperCore = new THREE.Mesh(upperCoreGeo, bodyMaterial);
     upperCore.position.y = 7.5;
     upperCore.castShadow = true;
+    addAnimeOutline(upperCore, 0.035, 0x090d16);
     this.group.add(upperCore);
 
     // Red Japanese stripe band
@@ -78,6 +81,7 @@ export class Rocket {
     const nose = new THREE.Mesh(noseGeo, bodyMaterial);
     nose.position.y = 10.75;
     nose.castShadow = true;
+    addAnimeOutline(nose, 0.035, 0x090d16);
     this.group.add(nose);
 
     // Launch escape / telemetry antenna tip
@@ -115,12 +119,14 @@ export class Rocket {
       const bBodyGeo = new THREE.CylinderGeometry(0.48, 0.48, 5.2, 12);
       const bBody = new THREE.Mesh(bBodyGeo, bodyMaterial);
       bBody.castShadow = true;
+      addAnimeOutline(bBody, 0.04, 0x090d16);
       boosterGroup.add(bBody);
 
       // Booster Nose Cone
       const bNoseGeo = new THREE.ConeGeometry(0.48, 1.5, 12);
       const bNose = new THREE.Mesh(bNoseGeo, darkMaterial);
       bNose.position.y = 3.35;
+      addAnimeOutline(bNose, 0.04, 0x090d16);
       boosterGroup.add(bNose);
 
       // Booster Nozzle

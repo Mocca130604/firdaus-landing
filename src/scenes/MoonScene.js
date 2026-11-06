@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createAnimeToonMaterial, addAnimeOutline } from '../core/AnimeStyle.js';
 
 /**
  * Moon Landing Scene (Finish Alt ~384)
@@ -86,11 +87,9 @@ export class MoonScene {
     }
     groundGeo.computeVertexNormals();
 
-    const moonMat = new THREE.MeshStandardMaterial({
-      color: 0x95a5a6, // Light lunar grey
-      roughness: 0.95,
-      metalness: 0.05,
-      flatShading: true
+    const moonMat = createAnimeToonMaterial({
+      color: 0x94a3b8, // Light cel-shaded lunar slate
+      roughness: 0.85,
     });
 
     const ground = new THREE.Mesh(groundGeo, moonMat);
@@ -104,22 +103,21 @@ export class MoonScene {
     const pad = new THREE.Group();
     pad.position.set(0, baseY + 0.1, 0);
 
-    const padMat = new THREE.MeshStandardMaterial({
-      color: 0x2d3436,
+    const padMat = createAnimeToonMaterial({
+      color: 0x1e293b,
       roughness: 0.5,
-      metalness: 0.6,
-      flatShading: true
     });
 
-    const borderMat = new THREE.MeshStandardMaterial({
-      color: 0xf39c12, // Warning yellow
+    const borderMat = createAnimeToonMaterial({
+      color: 0xf59e0b,
       roughness: 0.4
     });
 
-    // Hexagonal Landing Pad
+    // Hexagonal Landing Pad with anime outline
     const hexGeo = new THREE.CylinderGeometry(5.2, 5.5, 0.4, 6);
     const hexMesh = new THREE.Mesh(hexGeo, padMat);
     hexMesh.receiveShadow = true;
+    addAnimeOutline(hexMesh, 0.035, 0x090d16);
     pad.add(hexMesh);
 
     // Glowing Target Ring
@@ -237,14 +235,14 @@ export class MoonScene {
     const earthGroup = new THREE.Group();
     earthGroup.position.set(-45, baseY + 45, -70);
 
-    // Blue Marble Sphere
+    // Blue Marble Sphere with Anime Cel-Shading
     const earthGeo = new THREE.SphereGeometry(14, 32, 32);
-    const earthMat = new THREE.MeshStandardMaterial({
-      color: 0x0984e3,
-      roughness: 0.45,
-      metalness: 0.1
+    const earthMat = createAnimeToonMaterial({
+      color: 0x0284c7,
+      roughness: 0.35,
     });
     this.earthMesh = new THREE.Mesh(earthGeo, earthMat);
+    addAnimeOutline(this.earthMesh, 0.02, 0x0c4a6e);
     earthGroup.add(this.earthMesh);
 
     // Atmosphere Rim Glow
