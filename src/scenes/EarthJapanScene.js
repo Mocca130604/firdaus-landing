@@ -1,12 +1,13 @@
 import * as THREE from 'three';
+import { createAnimeToonMaterial, AnimeColors } from '../core/AnimeStyle.js';
 
 /**
  * Earth & Japanese Landscape Scene (Start 0km)
- * Features:
- * - Snow-capped low-poly Mount Fuji
+ * Enhanced with Makoto Shinkai Anime 3D Cel-Shaded aesthetics:
+ * - Snow-capped low-poly Mount Fuji with discrete anime cel-shading
  * - Japanese 5-tier Pagoda temple with lantern illumination
- * - Vermilion red Torii gate
- * - Sakura cherry blossom trees
+ * - Anime Vermilion red Torii gate
+ * - Glowing Sakura cherry blossom trees
  * - Tokyo distant skyline with glowing skyscraper windows
  * - High-tech launch gantry tower & platform
  */
@@ -56,11 +57,8 @@ export class EarthJapanScene {
     }
     groundGeo.computeVertexNormals();
 
-    const groundMat = new THREE.MeshStandardMaterial({
-      color: 0x223a2a, // Deep mossy cedar green
-      roughness: 0.9,
-      metalness: 0.1,
-      flatShading: true
+    const groundMat = createAnimeToonMaterial({
+      color: 0x1d3a28, // Anime lush cedar green
     });
 
     const ground = new THREE.Mesh(groundGeo, groundMat);
@@ -71,12 +69,10 @@ export class EarthJapanScene {
 
     // Reflective Water Lake near Torii Gate
     const waterGeo = new THREE.PlaneGeometry(80, 50);
-    const waterMat = new THREE.MeshStandardMaterial({
-      color: 0x1b3b4b,
-      roughness: 0.2,
-      metalness: 0.7,
+    const waterMat = createAnimeToonMaterial({
+      color: 0x1d4ed8,
       transparent: true,
-      opacity: 0.88
+      opacity: 0.85
     });
     const water = new THREE.Mesh(waterGeo, waterMat);
     water.rotation.x = -Math.PI / 2;
@@ -113,19 +109,16 @@ export class EarthJapanScene {
     }
     fujiGeo.computeVertexNormals();
 
-    // Mountain lower volcanic rock material
-    const rockMat = new THREE.MeshStandardMaterial({
-      color: 0x242838, // Slate indigo volcanic rock
-      roughness: 0.85,
-      metalness: 0.1,
-      flatShading: true
+    // Mountain lower volcanic rock material (Cel-shaded Anime)
+    const rockMat = createAnimeToonMaterial({
+      color: AnimeColors.fujiMountain,
     });
     const mountain = new THREE.Mesh(fujiGeo, rockMat);
     mountain.position.y = height / 2;
     mountain.receiveShadow = true;
     fujiGroup.add(mountain);
 
-    // Snow Cap Crown
+    // Snow Cap Crown (Crisp Anime Cel Snow)
     const snowHeight = 16;
     const snowGeo = new THREE.CylinderGeometry(topRadius * 1.01, 23, snowHeight, 24, 4);
     const sPos = snowGeo.attributes.position;
@@ -139,11 +132,8 @@ export class EarthJapanScene {
     }
     snowGeo.computeVertexNormals();
 
-    const snowMat = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      roughness: 0.4,
-      metalness: 0.05,
-      flatShading: true
+    const snowMat = createAnimeToonMaterial({
+      color: AnimeColors.fujiSnow,
     });
 
     const snowCap = new THREE.Mesh(snowGeo, snowMat);
@@ -175,16 +165,12 @@ export class EarthJapanScene {
       flatShading: true
     });
 
-    const roofMat = new THREE.MeshStandardMaterial({
-      color: 0x232c33, // Japanese dark slate roof tiles
-      roughness: 0.5,
-      flatShading: true
+    const roofMat = createAnimeToonMaterial({
+      color: 0x1e2638, // Japanese dark slate roof tiles
     });
 
-    const vermilionMat = new THREE.MeshStandardMaterial({
-      color: 0xb33927,
-      roughness: 0.5,
-      flatShading: true
+    const vermilionMat = createAnimeToonMaterial({
+      color: AnimeColors.toriiVermilion,
     });
 
     // 5 Tiers
@@ -352,16 +338,12 @@ export class EarthJapanScene {
       flatShading: true
     });
 
-    // Blossom Foliage Materials (delicate, serene pale sakura blush)
-    const pinkMat1 = new THREE.MeshStandardMaterial({
-      color: 0xfce7f3, // Soft ivory blush
-      roughness: 0.8,
-      flatShading: true
+    // Blossom Foliage Materials (Glowing Anime Sakura Blossom)
+    const pinkMat1 = createAnimeToonMaterial({
+      color: AnimeColors.sakuraBlossom,
     });
-    const pinkMat2 = new THREE.MeshStandardMaterial({
-      color: 0xf1f5f9, // Subtle pale slate white
-      roughness: 0.8,
-      flatShading: true
+    const pinkMat2 = createAnimeToonMaterial({
+      color: AnimeColors.sakuraHighlight,
     });
 
     // Gnarled Trunk

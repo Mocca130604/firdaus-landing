@@ -41,9 +41,19 @@ export class FlightHUD {
           <span class="status-text" id="flight-status-text">${t.cruisingStatus}</span>
         </div>
 
+        <!-- QUICK AUTOPILOT DESTINATIONS -->
+        <div class="flight-waypoint-bar">
+          <span class="waypoint-label">FLY TO:</span>
+          <button class="waypoint-pill" data-target="about">🌍 Yokohama</button>
+          <button class="waypoint-pill" data-target="skills">🪐 Arsenal</button>
+          <button class="waypoint-pill" data-target="experience">🔴 Odyssey</button>
+          <button class="waypoint-pill" data-target="projects">💎 Enterprise</button>
+          <button class="waypoint-pill" data-target="contact">🌕 Moon</button>
+        </div>
+
         <div class="flight-controls-hint hide-mobile">
           <span class="hint-icon">🎮</span>
-          <span class="hint-text">${t.controlsHint}</span>
+          <span class="hint-text">WASD: Steer & Thrust • Click Planet to Autopilot</span>
         </div>
 
         <button class="flight-btn-exit" id="btn-exit-exploration" title="Return to Story Scroll">
@@ -119,6 +129,19 @@ export class FlightHUD {
         this.onBreakOrbit();
       });
     }
+
+    // Bind Waypoint Navigation Pills (Click-to-Fly)
+    const wpPills = this.container.querySelectorAll('.waypoint-pill');
+    wpPills.forEach((pill) => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = pill.getAttribute('data-target');
+        if (targetId) {
+          audioSynth.playBeep(780, 0.08);
+          this.onTargetPlanet(targetId);
+        }
+      });
+    });
 
     const btnViewDossier = this.container.querySelector('#btn-holo-view-dossier');
     if (btnViewDossier) {
@@ -249,3 +272,4 @@ export class FlightHUD {
     }
   }
 }
+

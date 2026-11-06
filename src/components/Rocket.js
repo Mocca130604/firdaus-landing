@@ -1,7 +1,9 @@
 import * as THREE from 'three';
+import { createAnimeToonMaterial, AnimeColors } from '../core/AnimeStyle.js';
 
 /**
  * Procedural Stylized Multi-Stage Rocket ("Ryusei-1" / 流星-1)
+ * Enhanced with Anime 3D Cel-Shaded aesthetics (JAXA / Anime Inspired)
  * Features detachable boosters, detailed engine bells, fins, and telemetry markings.
  */
 export class Rocket {
@@ -15,37 +17,25 @@ export class Rocket {
   }
 
   init() {
-    // High-tech Materials
-    const bodyMaterial = new THREE.MeshStandardMaterial({
-      color: 0xf5f6fa,
-      roughness: 0.35,
-      metalness: 0.25,
-      flatShading: true
+    // --- Materials: Authentic Anime Cel-Shaded (3D Toon) ---
+    const bodyMaterial = createAnimeToonMaterial({
+      color: AnimeColors.rocketWhite,
     });
 
-    const darkMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1e272e,
-      roughness: 0.4,
-      metalness: 0.6,
-      flatShading: true
+    const darkMaterial = createAnimeToonMaterial({
+      color: AnimeColors.rocketNavy,
     });
 
-    const redAccentMaterial = new THREE.MeshStandardMaterial({
-      color: 0xd63031, // Japanese vermilion red
-      roughness: 0.3,
-      metalness: 0.1,
-      flatShading: true
+    const redAccentMaterial = createAnimeToonMaterial({
+      color: AnimeColors.rocketCrimson,
     });
 
-    const engineMetalMaterial = new THREE.MeshStandardMaterial({
-      color: 0x2f3640,
-      roughness: 0.2,
-      metalness: 0.9,
-      flatShading: true
+    const engineMetalMaterial = createAnimeToonMaterial({
+      color: 0x1f2937,
     });
 
     const engineNozzleGlowMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffaa33
+      color: AnimeColors.rocketCyanGlow,
     });
 
     // --- 1. Core Fuselage ---

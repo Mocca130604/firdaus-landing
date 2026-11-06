@@ -3,6 +3,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+import { AnimeColors } from './AnimeStyle.js';
 
 /**
  * Core Scene, Camera, Renderer, and Post-Processing Manager
@@ -26,7 +27,7 @@ export class SceneManager {
 
   initScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x0f1523); // Refined dark twilight slate
+    this.scene.background = new THREE.Color(AnimeColors.skyZenith); // Makoto Shinkai deep indigo
   }
 
   initCamera() {
@@ -84,12 +85,11 @@ export class SceneManager {
   }
 
   updateSkyGradient(progress) {
-    // Dynamic cohesive Sky color interpolation: Dark Slate Twilight -> Deep Navy -> Obsidian Space
+    // Dynamic anime sky gradient: Shinkai twilight indigo -> deep space navy -> obsidian space
     let skyColor;
     if (progress < 0.20) {
-      // Twilight slate-indigo to deep navy
       const t = progress / 0.20;
-      skyColor = new THREE.Color(0x0f1523).lerp(new THREE.Color(0x0a0f1d), t);
+      skyColor = new THREE.Color(AnimeColors.skyZenith).lerp(new THREE.Color(0x0a0f1d), t);
     } else if (progress < 0.50) {
       // Deep navy to deep space black
       const t = (progress - 0.20) / 0.30;

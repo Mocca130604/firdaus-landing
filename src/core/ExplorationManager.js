@@ -42,6 +42,17 @@ export class ExplorationManager {
       onExit: () => this.exitExplorationMode(),
       onBreakOrbit: () => this.breakOrbit(),
       onViewDossier: (planet) => this.viewDossier(planet),
+      onTargetPlanet: (planetId) => this.targetPlanet(planetId),
+    });
+  }
+
+  targetPlanet(planetId) {
+    if (!this.isExplorationMode) return;
+    const planet = this.planetaryScene.planets.find((p) => p.id === planetId);
+    if (!planet) return;
+
+    this.flightController.flyTo(planet.position, planet.name, () => {
+      this.flightHUD.showHologram(planet);
     });
   }
 
@@ -243,3 +254,4 @@ export class ExplorationManager {
     });
   }
 }
+

@@ -1,19 +1,20 @@
 import * as THREE from 'three';
+import { AnimeColors } from './AnimeStyle.js';
 
 /**
  * Dynamic Lighting Manager
- * Cohesive, subtle cinematic lighting without harsh oversaturated rainbow hues.
+ * Tuned for Anime Cel-Shading: Crisp stepped shadows, warm sun rim, and lavender-cyan ambient fill.
  */
 export class Lighting {
   constructor(scene) {
     this.scene = scene;
 
-    // 1. Ambient Light (Subtle cool slate-indigo)
-    this.ambientLight = new THREE.AmbientLight(0x1e293b, 0.85);
+    // 1. Ambient Light (Anime lavender-indigo shadow tint)
+    this.ambientLight = new THREE.AmbientLight(0x2d2b55, 1.1);
     this.scene.add(this.ambientLight);
 
-    // 2. Primary Directional Light (Crisp daylight white)
-    this.sunLight = new THREE.DirectionalLight(0xf8fafc, 1.9);
+    // 2. Primary Directional Sun Light (Crisp warm golden-white anime sun)
+    this.sunLight = new THREE.DirectionalLight(0xfff5ea, 2.2);
     this.sunLight.position.set(-35, 55, 30);
     this.sunLight.castShadow = true;
     this.sunLight.shadow.mapSize.width = 2048;
@@ -27,12 +28,12 @@ export class Lighting {
     this.sunLight.shadow.bias = -0.0005;
     this.scene.add(this.sunLight);
 
-    // 3. Rim / Hemisphere Light (Cool sky / dark ground)
-    this.hemiLight = new THREE.HemisphereLight(0x94a3b8, 0x0f172a, 0.5);
+    // 3. Rim / Hemisphere Light (Anime sky blue zenith / warm rose horizon fill)
+    this.hemiLight = new THREE.HemisphereLight(0xa5b4fc, 0x1e1b4b, 0.7);
     this.scene.add(this.hemiLight);
 
     // 4. Fog (Clean deep twilight atmosphere)
-    this.scene.fog = new THREE.FogExp2(0x0f172a, 0.006);
+    this.scene.fog = new THREE.FogExp2(0x161338, 0.005);
   }
 
   update(progress, cameraY) {
@@ -42,28 +43,28 @@ export class Lighting {
     this.sunLight.target.updateMatrixWorld();
 
     if (progress < 0.25) {
-      // Earth Atmosphere / Japan Launch Site
+      // Earth Atmosphere / Japan Launch Site (Warm anime sunset twilight)
       const t = progress / 0.25;
-      this.ambientLight.color.setHex(0x1e293b);
-      this.ambientLight.intensity = 0.85 - t * 0.2;
+      this.ambientLight.color.setHex(0x2d2b55);
+      this.ambientLight.intensity = 1.1 - t * 0.25;
 
-      this.sunLight.color.setHex(0xf8fafc);
-      this.sunLight.intensity = 1.9;
+      this.sunLight.color.setHex(0xfff5ea);
+      this.sunLight.intensity = 2.2;
 
       // Fog transitions smoothly into deep space
-      const c1 = new THREE.Color(0x0f172a);
+      const c1 = new THREE.Color(0x161338);
       const c2 = new THREE.Color(0x04060a);
       const fogColor = c1.lerp(c2, t);
       this.scene.fog.color.copy(fogColor);
-      this.scene.fog.density = 0.006 - t * 0.003;
+      this.scene.fog.density = 0.005 - t * 0.003;
 
     } else {
       // Deep Space & Lunar surface (High contrast, crisp directional illumination)
-      this.ambientLight.color.setHex(0x0f172a);
-      this.ambientLight.intensity = 0.45;
+      this.ambientLight.color.setHex(0x181e36);
+      this.ambientLight.intensity = 0.6;
 
       this.sunLight.color.setHex(0xffffff);
-      this.sunLight.intensity = 2.1;
+      this.sunLight.intensity = 2.4;
 
       this.scene.fog.color.setHex(0x04060a);
       this.scene.fog.density = 0.0001; // virtually no fog in space vacuum

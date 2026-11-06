@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createAnimeToonMaterial } from '../core/AnimeStyle.js';
 
 /**
  * Deep Space Scene (Alt 120 - 320)
@@ -120,11 +121,9 @@ export class SpaceScene {
   }
 
   createAsteroidBelt() {
-    const rockMat = new THREE.MeshStandardMaterial({
-      color: 0x636e72,
-      roughness: 0.9,
-      metalness: 0.2,
-      flatShading: true
+    const rockMat = createAnimeToonMaterial({
+      color: 0x64748b,
+      roughness: 0.8,
     });
 
     // 16 Asteroids floating along the space highway
@@ -168,24 +167,23 @@ export class SpaceScene {
     const satGroup = new THREE.Group();
     satGroup.position.set(-18, 175, 12);
 
-    const goldFoilMat = new THREE.MeshStandardMaterial({
-      color: 0xd4af37,
-      metalness: 0.9,
-      roughness: 0.2,
-      flatShading: true
-    });
-
-    const solarMat = new THREE.MeshStandardMaterial({
-      color: 0x0c2461,
-      metalness: 0.7,
+    const goldFoilMat = createAnimeToonMaterial({
+      color: 0xf59e0b,
+      emissive: 0xb45309,
+      emissiveIntensity: 0.2,
       roughness: 0.3,
-      flatShading: true
     });
 
-    const frameMat = new THREE.MeshStandardMaterial({
-      color: 0x2f3542,
-      metalness: 0.8,
-      roughness: 0.3
+    const solarMat = createAnimeToonMaterial({
+      color: 0x1d4ed8,
+      emissive: 0x1e40af,
+      emissiveIntensity: 0.2,
+      roughness: 0.4,
+    });
+
+    const frameMat = createAnimeToonMaterial({
+      color: 0x334155,
+      roughness: 0.5,
     });
 
     // Satellite Main Bus / Body

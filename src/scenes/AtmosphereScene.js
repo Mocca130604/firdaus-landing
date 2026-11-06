@@ -1,9 +1,10 @@
 import * as THREE from 'three';
+import { createAnimeToonMaterial } from '../core/AnimeStyle.js';
 
 /**
  * Atmosphere Scene (Alt 20 - 100)
  * Features:
- * - 3D low-poly procedural fluffy clouds floating at varying altitudes
+ * - 3D procedural fluffy cel-shaded clouds (Makoto Shinkai / Ghibli sky aesthetic)
  * - Atmospheric fog gradient
  * - Gentle drifting animation
  */
@@ -15,13 +16,11 @@ export class AtmosphereScene {
   }
 
   buildAtmosphere() {
-    const cloudMat = new THREE.MeshStandardMaterial({
-      color: 0xfffcf5,
-      roughness: 0.95,
-      metalness: 0.0,
+    const cloudMat = createAnimeToonMaterial({
+      color: 0xffffff,
+      roughness: 0.9,
       transparent: true,
-      opacity: 0.88,
-      flatShading: true
+      opacity: 0.92,
     });
 
     // Cloud layers at altitudes 25, 45, 65, 85

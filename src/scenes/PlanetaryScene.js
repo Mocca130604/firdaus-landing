@@ -1,8 +1,9 @@
 import * as THREE from 'three';
+import { createAnimeToonMaterial } from '../core/AnimeStyle.js';
 
 /**
  * Planetary Sector Scene for Exploration Mode
- * Features 5 distinct stylized celestial bodies:
+ * Styled with Anime Cel-Shaded aesthetics (3D Toon):
  * 1. Terra Yokohama (Base - About Me & Philosophy)
  * 2. Planet Arsenal (Golden Gas Giant with Tech Particle Rings - Skills & Stack)
  * 3. Planet Odyssey (Crimson Canyon World - Career Flight Stages)
@@ -84,13 +85,10 @@ export class PlanetaryScene {
     const pGroup = new THREE.Group();
     pGroup.position.copy(cfg.pos);
 
-    // Planet Body
+    // Planet Body (Anime Cel-Shaded)
     const geo = new THREE.SphereGeometry(cfg.radius, 32, 32);
-    const mat = new THREE.MeshStandardMaterial({
+    const mat = createAnimeToonMaterial({
       color: cfg.color,
-      roughness: 0.65,
-      metalness: 0.2,
-      flatShading: true,
     });
     const mesh = new THREE.Mesh(geo, mat);
     pGroup.add(mesh);
@@ -139,13 +137,11 @@ export class PlanetaryScene {
     const pGroup = new THREE.Group();
     pGroup.position.copy(cfg.pos);
 
-    // Planet Body (Amber gold)
+    // Planet Body (Amber gold cel-shaded)
     const geo = new THREE.SphereGeometry(cfg.radius, 32, 32);
-    const mat = new THREE.MeshStandardMaterial({
+    const mat = createAnimeToonMaterial({
       color: cfg.color,
-      roughness: 0.4,
-      metalness: 0.35,
-      flatShading: true,
+      roughness: 0.35,
     });
     const mesh = new THREE.Mesh(geo, mat);
     pGroup.add(mesh);
@@ -170,10 +166,10 @@ export class PlanetaryScene {
       const angle = (i / 4) * Math.PI * 2;
       const sDist = cfg.radius * 1.85;
       const sGeo = new THREE.OctahedronGeometry(1.6, 0);
-      const sMat = new THREE.MeshStandardMaterial({
+      const sMat = createAnimeToonMaterial({
         color: 0xfef08a,
         emissive: 0xd97706,
-        emissiveIntensity: 0.5,
+        emissiveIntensity: 0.4,
       });
       const sat = new THREE.Mesh(sGeo, sMat);
       sat.position.set(Math.cos(angle) * sDist, Math.sin(angle) * 3, Math.sin(angle) * sDist);
@@ -201,13 +197,11 @@ export class PlanetaryScene {
     const pGroup = new THREE.Group();
     pGroup.position.copy(cfg.pos);
 
-    // Crimson Mars Body
+    // Crimson Mars Body (Anime cel-shaded)
     const geo = new THREE.SphereGeometry(cfg.radius, 28, 28);
-    const mat = new THREE.MeshStandardMaterial({
+    const mat = createAnimeToonMaterial({
       color: cfg.color,
-      roughness: 0.8,
-      metalness: 0.1,
-      flatShading: true,
+      roughness: 0.6,
     });
     const mesh = new THREE.Mesh(geo, mat);
     pGroup.add(mesh);
@@ -250,13 +244,11 @@ export class PlanetaryScene {
     const pGroup = new THREE.Group();
     pGroup.position.copy(cfg.pos);
 
-    // Cyan Neon Ice Giant Body
+    // Cyan Neon Ice Giant Body (Anime cel-shaded)
     const geo = new THREE.SphereGeometry(cfg.radius, 32, 32);
-    const mat = new THREE.MeshStandardMaterial({
+    const mat = createAnimeToonMaterial({
       color: cfg.color,
       roughness: 0.3,
-      metalness: 0.4,
-      flatShading: true,
     });
     const mesh = new THREE.Mesh(geo, mat);
     pGroup.add(mesh);
@@ -268,11 +260,10 @@ export class PlanetaryScene {
       const angle = (i / 3) * Math.PI * 2;
       const dist = cfg.radius * 1.7;
       const sGeo = new THREE.BoxGeometry(2.5, 2.5, 2.5);
-      const sMat = new THREE.MeshStandardMaterial({
+      const sMat = createAnimeToonMaterial({
         color: projectColors[i],
         emissive: projectColors[i],
-        emissiveIntensity: 0.4,
-        roughness: 0.2,
+        emissiveIntensity: 0.35,
       });
       const pCube = new THREE.Mesh(sGeo, sMat);
       pCube.position.set(Math.cos(angle) * dist, Math.sin(angle) * 4, Math.sin(angle) * dist);
@@ -311,23 +302,20 @@ export class PlanetaryScene {
     const pGroup = new THREE.Group();
     pGroup.position.copy(cfg.pos);
 
-    // Lunar Sphere with Craters
+    // Lunar Sphere with Craters (Anime cel-shaded)
     const geo = new THREE.SphereGeometry(cfg.radius, 28, 28);
-    const mat = new THREE.MeshStandardMaterial({
+    const mat = createAnimeToonMaterial({
       color: cfg.color,
-      roughness: 0.9,
-      metalness: 0.1,
-      flatShading: true,
+      roughness: 0.7,
     });
     const mesh = new THREE.Mesh(geo, mat);
     pGroup.add(mesh);
 
     // Lunar Landing Pad Hexagon on North Pole
     const padGeo = new THREE.CylinderGeometry(5, 5, 0.8, 6);
-    const padMat = new THREE.MeshStandardMaterial({
+    const padMat = createAnimeToonMaterial({
       color: 0x1e293b,
       roughness: 0.4,
-      metalness: 0.7,
     });
     const pad = new THREE.Mesh(padGeo, padMat);
     pad.position.set(0, cfg.radius + 0.4, 0);
@@ -402,3 +390,4 @@ export class PlanetaryScene {
     }
   }
 }
+
